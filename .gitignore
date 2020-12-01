@@ -1,0 +1,12 @@
+*.pyc
+__pycache__/
+.vscode/
+venv/
+nltk_data/
+.env
+output.txt
+last_tweet_id*.txt
+chromedriver
+output/
+deep_learning/*.h5
+dataset/source/
