@@ -1,0 +1,8 @@
+div[data-testid="stImage"] {
+    text-align: center;
+    display: block;
+}
+
+div[data-testid="stImage"] img:not([style]) {
+    height: 400px;
+}
