@@ -8,7 +8,7 @@ import pandas as pd
 import seaborn as sn
 
 
-def plot_custom_confusion_matrix(data, emotion_name, dataset_name, filename_format):
+def plot_custom_confusion_matrix(data, emotion_name, dataset_name, filename_format=None):
     maxValue = max([max(data[0]), max(data[1])])
 
     df_cm = pd.DataFrame(data, range(2), range(2))
@@ -39,6 +39,8 @@ def plot_custom_confusion_matrix(data, emotion_name, dataset_name, filename_form
     ax.axvline(x=0, color='k',linewidth=1)
     ax.axvline(x=corr.shape[0], color='k',linewidth=2)
 
+    if not filename_format:
+        return plt
     plt.savefig(filename_format.format(emotion_name=emotion_name, dataset_name=dataset_name))
 
 if __name__ == "__main__":
