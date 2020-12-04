@@ -1,20 +1,25 @@
-from collections import namedtuple
-import altair as alt
 import math
-import pandas as pd
+import os
+from collections import namedtuple
+
+import altair as alt
 import numpy as np
+import pandas as pd
 import streamlit as st
+from dotenv import load_dotenv
+
+load_dotenv()
 
 try:
     # IDE imports
-    from demo.table_of_contents import ToC
     from demo.lstm_data import arq_data, confiability_data, tests_data
     from demo.plot_custom_confusion_matrix import plot_custom_confusion_matrix
+    from demo.table_of_contents import ToC
 except ImportError:
     # Streamlit runtime imports
-    from table_of_contents import ToC
     from lstm_data import arq_data, confiability_data, tests_data
     from plot_custom_confusion_matrix import plot_custom_confusion_matrix
+    from table_of_contents import ToC
 
 # Instantiate and initialize Table of Contents
 toc = ToC()
@@ -22,8 +27,10 @@ st.sidebar.title("Conteúdo")
 # Create table of contents on sidebar with placeholder
 toc.placeholder(st.sidebar)
 
+base_path = os.environ.get("STREAMLIT_BASE_PATH", os.path.dirname(__file__))
+
 # Initialize the introductory texts and add Subtitles and Headers to Table of Contents
-with open('/media/HDD2TB/home/Documents/Poli-USP/Quadri 9/TCC2/code/demo/demo.md', 'r') as f:
+with open(f'{base_path}/demo.md', 'r') as f:
     for line in f.readlines():
         if line.startswith("###"):
             toc.subheader(line[3:])
@@ -32,7 +39,7 @@ with open('/media/HDD2TB/home/Documents/Poli-USP/Quadri 9/TCC2/code/demo/demo.md
         else:
             line
 
-images_base_path = '/media/HDD2TB/home/Documents/Poli-USP/Quadri 9/TCC2/code/demo/images/'
+images_base_path = f'{base_path}/images/'
 
 # Sidebar Select Boxes to choose technique, dataset, and emotion to display
 tech = st.sidebar.selectbox("Técnica", ["Naive Bayes", "Rede neural"])
