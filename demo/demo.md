@@ -2,6 +2,15 @@
 
 O presente trabalho tem como objetivo analisar as reações das pessoas às _fake news_ e relacionar as emoções provocadas por elas com sua propagação.
 
+Autores:
+* Lucas Gomes de Paiva
+* Thales César Giriboni de Mello e Silva
+
+Orientador:
+* Prof. Dr. Ricardo L. de Azevedo Rocha
+
+Código-fonte disponível em: [https://github.com/brosquinha/tcc](https://github.com/brosquinha/tcc)
+
 ## Motivação
 
 Dada a importância das notícias falsas nos últimos anos, convém analisar qual o impacto emocional que elas causam nas pessoas. Para tanto, observando o fato de que sua propagação está fortemente relacionada às redes sociais, é possível fazer essa análise utilizando a plataforma Twitter. Hoje, muitas pessoas utilizam a rede social como fonte de notícias para se manterem atualizas.
@@ -45,4 +54,4 @@ Durante os testes, observa-se atentamente às matrizes de confusão geradas pelo
 
 ## Resultados
 
-Abaixo apresentam-se os resultados obtidos pelo projeto.
+Abaixo apresentam-se os resultados obtidos pelo projeto. Selecione os modelos desejados utilizando as caixas de seleções na navegação lateral.
