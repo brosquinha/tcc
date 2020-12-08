@@ -100,13 +100,13 @@ tests_data = {
 }
 
 arq_data = {
-    'CNN': 'cnn_only.png',
-    'LSTM bidirecional': 'lstm_only.png',
-    'Concatenação LSTM-bi e CNN': 'lstm_cnn_conc.png',
-    'LSTM-bi seguida de CNN': 'lstm_and_cnn.png',
-    'Função de custo Dice': 'lstm_and_cnn.png',
-    'Duas camadas LSTM e CNN com max pooling local': 'lstm_cnn_two_maxpool.png',
-    'Duas camadas LSTM e CNN com max pooling único': 'lstm_cnn_one_maxpool.png'
+    'CNN': 'cnn_only',
+    'LSTM bidirecional': 'lstm_only',
+    'Concatenação LSTM-bi e CNN': 'lstm_cnn_conc',
+    'LSTM-bi seguida de CNN': 'lstm_and_cnn',
+    'Função de custo Dice': 'lstm_and_cnn',
+    'Duas camadas LSTM e CNN com max pooling local': 'lstm_cnn_two_maxpool',
+    'Duas camadas LSTM e CNN com max pooling único': 'lstm_cnn_one_maxpool'
 }
 
 confiability_data = {

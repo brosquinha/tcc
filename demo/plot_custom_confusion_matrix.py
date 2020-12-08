@@ -8,7 +8,7 @@ import pandas as pd
 import seaborn as sn
 
 
-def plot_custom_confusion_matrix(data, emotion_name, dataset_name, filename_format=None):
+def plot_custom_confusion_matrix(data, emotion_name, dataset_name, filename_format=None, title=None):
     maxValue = max([max(data[0]), max(data[1])])
 
     df_cm = pd.DataFrame(data, range(2), range(2))
@@ -24,7 +24,7 @@ def plot_custom_confusion_matrix(data, emotion_name, dataset_name, filename_form
     ax = sn.heatmap(df_cm, annot=True, cmap='Blues', alpha = 0.0, fmt="d", mask= np.array(data) > 0.5 * maxValue, ax=ax, annot_kws= {'color': 'b'}, cbar = False)
 
     # Set plot title and axis labels
-    plt.title(f'{dataset_name} LSTM {emotion_name}')
+    plt.title(title or f'{dataset_name} LSTM {emotion_name}')
     
     plt.xlabel('Predicted result')
     ax.set_xticklabels(["No", "Yes"]) 
@@ -41,7 +41,8 @@ def plot_custom_confusion_matrix(data, emotion_name, dataset_name, filename_form
 
     if not filename_format:
         return plt
-    plt.savefig(filename_format.format(emotion_name=emotion_name, dataset_name=dataset_name))
+    plt.savefig(filename_format.format(emotion_name=emotion_name.lower(), dataset_name=dataset_name.lower()))
+    return plt
 
 if __name__ == "__main__":
     dados = [[6022, 1001], [3489, 471]]

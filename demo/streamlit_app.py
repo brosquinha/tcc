@@ -44,7 +44,7 @@ with open(f'{base_path}/demo.md', 'r') as f:
         else:
             line
 
-images_base_path = f'{base_path}/images/'
+images_base_path = f'{base_path}/images'
 
 # Sidebar Select Boxes to choose technique, dataset, and emotion to display
 tech = st.sidebar.selectbox("Técnica", ["Naive Bayes", "Rede neural"])
@@ -63,7 +63,7 @@ for action in ["Testes", "Confiabilidade", "Validação", "Análise final"]:
     )
     toc.subheader(f"{action}")
     if action == 'Análise final':
-        filename = f'{images_base_path}resultados/popular_tweets_{dataset.lower()}_{tech_formatted}.png'
+        filename = f'{images_base_path}/resultados/popular_tweets_{dataset.lower()}_{tech_formatted}.png'
     else:
         tech_path_formatted = 'naive_bayes' if tech == "Naive Bayes" else "lstm_cnn_conc"
         action_path_formatted = {
@@ -78,21 +78,32 @@ for action in ["Testes", "Confiabilidade", "Validação", "Análise final"]:
             "Tristeza": "sadness"
         }
         sufix = '-lstm' if tech_formatted == 'lstm' else ''
-        filename = f'{images_base_path}matrixes/{tech_path_formatted}/{action_path_formatted[action]}/'+\
+        filename = f'{images_base_path}/matrixes/{tech_path_formatted}/{action_path_formatted[action]}/'+\
             f'{emotion_formatted[emotion]}-{dataset.lower()}{sufix}.png'
 
     if tech == "Rede neural" and action in ['Testes', 'Confiabilidade']:
+        matrix_filename = f'{images_base_path}/matrixes/'
         if action == 'Testes':
             arq = st.selectbox("Arquitetura", list(tests_data.keys()))
 
-            arq_filename = f'{images_base_path}/arquiteturas/{arq_data[arq]}'
+            arq_filename = f'{images_base_path}/arquiteturas/{arq_data[arq]}.png'
+            matrix_filename += f'{arq_data[arq]}/avaliacao/'
+            matrix_filename += '{emotion_name}-{dataset_name}.png'
             st.image(arq_filename)
 
+            plt_title = f'Confusion matrix for {emotion.lower()} with {arq_data[arq]} ({dataset} dataset)'
             st.write(results_texts['Arquitetura'])
 
-            plt = plot_custom_confusion_matrix(tests_data[arq][dataset][emotion], emotion, dataset)
+            plt = plot_custom_confusion_matrix(
+                tests_data[arq][dataset][emotion], emotion, dataset, None,
+                plt_title)
         else:
-            plt = plot_custom_confusion_matrix(confiability_data[dataset][emotion], emotion, dataset)
+            matrix_filename += 'lstm_cnn_conc/confiabilidade/{emotion_name}-{dataset_name}.png'
+            other_dataset = 'SemEval' if dataset == 'TEC' else 'TEC'
+            plt_title = f'Confusion matrix for {emotion.lower()} (trained on {dataset} and tested on {other_dataset})'
+            plt = plot_custom_confusion_matrix(
+                confiability_data[dataset][emotion], emotion, dataset, None,
+                plt_title)
         st.pyplot(plt)
         plt.close()
     else:
@@ -113,7 +124,7 @@ _tweets_ mais populares da base, a porcentagem de respostas alegres é considera
 """
 
 st.image(
-    f'{images_base_path}resultados/popular_tweets_aggregate_naive-bayes.png',
+    f'{images_base_path}/resultados/popular_tweets_aggregate_naive-bayes.png',
     use_column_width=True,
     caption="""
     Gráfico de dispersão ilustrando a popularidade de tweets propagadores
